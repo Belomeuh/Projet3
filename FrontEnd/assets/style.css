@@ -186,28 +186,28 @@ footer nav ul {
 	margin: 2em
 }
 
-.filters ul {
-display: flex;
-justify-content: center;
-gap: 10px;
-padding: 20px 0px 50px 0px;
-}
-
-.filters li {
+button {
 	border: 1px solid #1D6154;
 	border-radius: 60px;
+	background: white;
+	color: #1D6154;
 	font-size: 16px;
 	font-family: 'Syne';
-	color: #1D6154;
 	height: 37px;
-	display: flex;
-	align-items: center;
-	padding: 0px 9px;
-    min-width: 90px;
-    justify-content: center;
+	min-width: 90px;
+	padding: 0px 10px;
 }
 
-.filters li:hover {
-	background-color: #1D6154;
+button:hover {
+	background: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
 	color: white;
+}
+
+.filters {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	padding: 20px 0px 50px 0px;
 }
