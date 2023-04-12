@@ -52,7 +52,7 @@ const getWorks = async (categoryId) => {
   // On appelle l'API works
   await fetch("http://localhost:5678/api/works")
     //Si le fetch fonctionne on récupère les données en .json; Sinon on affiche une erreur
-    .then((response) => {z
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
@@ -136,3 +136,9 @@ const main = async () => {
 
 //A l'ouverture de la page, on execute la fonction main (getWorks et getCategories)
 main();
+
+//Rediréction vers login
+document.querySelector('#login')
+    .addEventListener('click', () => {
+        window.location.href = 'login.html';
+    });

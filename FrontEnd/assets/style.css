@@ -240,7 +240,7 @@ button:hover {
 	font-size: 14px;
 }
 
-a {
+.log_main a {
 	color: black;
 }
 
@@ -250,4 +250,14 @@ a {
 	border: #FFFFFF;
 	border-radius: 0%;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.login_body #login {
+	font-weight: 600;
+}
+
+.login_body footer {
+	padding-top: 379px;
+	display: flex;
+	justify-content: end;
 }
