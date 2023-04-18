@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script defer src="script.js"></script>
+    <script defer src="login.js"></script>
 </head>
 
 <body class="login_body">
@@ -25,20 +25,21 @@
         </nav>
 </header>    
 <main class="log_main">
-    <div class="log_container">
+<form class="log_container" id="form">
     <h2>Log In</h2>
-    <div>
+    <div class="log_class">
         <div class="logs">
         <p>E-mail</p>
-        <input type="email" id="mail" name="mail"><br><br>
+        <input type="email" id="email" name="email" required>
         </div>
         <div class="logs">
         <p>Mot de passe</p>
-        <input type="password" id="mdp" name="mdp"><br><br>
+        <input type="password" id="password" name="password" required>
         </div>
     </div>
-    <button class="log_button">Se connecter</button>
-    </div>
+    <button type="submit" class="log_button">Se connecter</button>
+    <span class="error-message"></span>
+</form>
     <a href="#">Mot de passe oublié</a>
 </main>
 <footer>
