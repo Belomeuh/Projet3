@@ -141,4 +141,56 @@ main();
 document.querySelector('#login')
     .addEventListener('click', () => {
         window.location.href = 'login.html';
-    });
+});
+
+//Mode admin
+const adminPage = () => {
+//On récupère les éléments
+body = document.querySelector("body")
+photoSophie = document.querySelector(".photoSophie")
+mesProjets = document.querySelector(".mesProjets")
+//
+ body.insertAdjacentHTML(
+    "beforeBegin",
+    `<div class="edit_bar">
+      <span class="edit"><i class="fa-regular fa-pen-to-square"></i> Mode édition</span>
+      <button>publier les changements</button>
+      </div>`
+  );
+
+photoSophie.insertAdjacentHTML(
+  "afterend",
+  `<a id="photoModif" href= "#" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
+  );
+mesProjets.insertAdjacentHTML(
+  "BeforeEnd", 
+  `<a id="modal_opener" href="#modal" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
+  );
+
+//On cache les filtres comme sur la maquette
+document.querySelector(".filters").style.display = "none";  
+document.querySelector(".mesProjets").style.margin = "108px 0px 92px 0px";
+
+//On gère la pertie logout
+logButton = document.querySelector("#login");
+logButton.innerHTML = `<a href="index.html">logout</a>`;
+
+logButton.addEventListener('click', function (disconnet) {
+  disconnet.preventDefault();
+  
+  sessionStorage.clear();
+})
+
+//On créer la modale
+}
+
+
+
+//Afficher les éléments adminPage si le token est stocké
+if ("token" !== null) {
+  adminPage();
+}
+
+  else if ("token" === null) {
+    home();
+  }

@@ -198,7 +198,7 @@ button {
 	padding: 0px 10px;
 }
 
-button:hover {
+body button:hover {
 	background: #1D6154;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
@@ -266,4 +266,48 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	gap: 30px;
+}
+
+.edit_bar {
+	background-color: black;
+	color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 21px;
+	margin: 0;
+	height: 59px;
+}
+
+.edit {
+	font-weight: 400;
+	font-family: "Work Sans";
+}
+
+.edit_bar button {
+	font-family: 'Work Sans';
+	padding: 0px 23px;
+	color: black;
+}
+
+#photoModif {
+	margin: 16px 0px 0px 57px;
+}
+
+figure {
+	display: flex;
+	flex-direction: column;
+}
+
+#modal_opener {
+	margin-left: 30px;
+		
+}
+
+.edit_link {
+	color: black;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 400;
+	text-decoration: none;
 }
