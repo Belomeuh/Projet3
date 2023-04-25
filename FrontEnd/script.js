@@ -164,33 +164,34 @@ photoSophie.insertAdjacentHTML(
   );
 mesProjets.insertAdjacentHTML(
   "BeforeEnd", 
-  `<a id="modal_opener" href="#modal" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
+  `<a id="modal_opener" href="#modale" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
   );
 
 //On cache les filtres comme sur la maquette
 document.querySelector(".filters").style.display = "none";  
 document.querySelector(".mesProjets").style.margin = "108px 0px 92px 0px";
 
-//On gère la pertie logout
-logButton = document.querySelector("#login");
-logButton.innerHTML = `<a href="index.html">logout</a>`;
+//On gère la partie logout
+const logButton = document.querySelector("#login");
+logButton.innerHTML = `<li>logout<li>`;
 
-logButton.addEventListener('click', function (disconnet) {
-  disconnet.preventDefault();
-  
-  sessionStorage.clear();
-})
+//On ouvre le modale
+modalOpening = document.querySelector("#modal_opener")
+modalOpening.addEventListener("click", ( )=> {
+    document.querySelector(".modale_section").style.display = 'block';
+  }
+);
 
-//On créer la modale
-}
-
-
+};
 
 //Afficher les éléments adminPage si le token est stocké
 if ("token" !== null) {
   adminPage();
 }
 
-  else if ("token" === null) {
-    home();
-  }
+
+
+
+
+
+  

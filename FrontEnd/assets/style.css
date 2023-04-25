@@ -311,3 +311,78 @@ figure {
 	font-weight: 400;
 	text-decoration: none;
 }
+
+/*Modale*/
+.modale_section {
+	display: none;
+}
+
+.modale {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s both;
+}
+
+.modale_body {
+	border-radius: 10px;
+	background-color: white;
+    width: 50%;
+    height: 50%;
+    padding: 20px;
+    overflow: auto;
+    animation: slideFromTop 0.3s both;
+}
+
+.closeModale {
+	float: right;
+	text-decoration: inherit;
+    color: inherit;
+}
+
+.modale_title{
+	font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.modale_conteneurAdd {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    border-top: 1px solid #B3B3B3;
+    margin: auto;
+}
+
+#addButton {
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 38px 0px 23px 0px;
+    width: 237px;
+    text-align: center;
+    border-radius: 60px;
+    height: 36px;
+	font-size: 14px;
+}
+
+#deleteAll {
+	color: red;
+	text-decoration: inherit;
+	font-family: "Work Sans";
+}
+
