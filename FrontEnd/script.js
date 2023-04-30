@@ -4,6 +4,7 @@ const gallery = document.querySelector(".gallery");
 // Get nav Filters
 const navFilters = document.querySelector(".filters");
 
+const modalGallery = document.querySelector(".modale_conteneur")
 
 
 // Fonction pour créer un projet dans la galerie
@@ -16,6 +17,7 @@ const createProject = (project) => {
   imageProject.src = project.imageUrl;
   imageProject.alt = project.title;
 
+
   const figcaptionProject = document.createElement("figcaption");
   figcaptionProject.innerText = project.title;
 
@@ -23,6 +25,31 @@ const createProject = (project) => {
   figureProject.appendChild(figcaptionProject);
   gallery.appendChild(figureProject);
 };
+
+// Fonction pour créer un projet dans le modal
+const createModalProject = (project) => {
+  const figureModalProject = document.createElement("figure");
+  figureModalProject.setAttribute("data-id", project.id);
+  figureModalProject.innerHTML = `<a href="#" id="trash_can"><i class="fa-solid fa-trash-can"></i></a>`;
+
+ // const trashIcon = document.querySelector("#trash_can");
+ // trashIcon.addEventListener('click', (e)=> {
+   // e.preventDefault();
+    //deleteWork();
+  //});
+
+  const imageModalProject = document.createElement("img");
+  imageModalProject.src = project.imageUrl;
+  imageModalProject.alt = project.title;
+ 
+   const figcaptionModalProject = document.createElement("figcaption");
+  figcaptionModalProject.innerText = ("éditer");
+
+  figureModalProject.appendChild(imageModalProject);
+  figureModalProject.appendChild(figcaptionModalProject);
+  modalGallery.appendChild(figureModalProject); 
+};
+
 
 // Fonction pour créer un bouton dans la nav des filtres
 const createButton = (category) => {
@@ -64,13 +91,14 @@ const getWorks = async (categoryId) => {
     .then((projects) => {
       // On efface tous les travaux pour avoir une page blanche
       dropElement(gallery); // Sur la gallery
-     
+      dropElement(modalGallery); // Sur le modal
 
       projects.forEach((project) => {
         //si categoryId est vide, on affiche tout
         //si categoryId est renseigné, On filtre les works sur la catégorie,
         if (categoryId == project.category.id || categoryId == null) {
-          createProject(project); // Créé la galerie section portfolio          
+          createProject(project); // Créé la galerie section portfolio 
+          createModalProject(project);  // Créer la galerie dans le modal
         }
       });
     })
@@ -137,12 +165,6 @@ const main = async () => {
 //A l'ouverture de la page, on execute la fonction main (getWorks et getCategories)
 main();
 
-//Rediréction vers login
-document.querySelector('#login')
-    .addEventListener('click', () => {
-        window.location.href = 'login.html';
-});
-
 //Mode admin
 const adminPage = () => {
 //On récupère les éléments
@@ -172,26 +194,63 @@ document.querySelector(".filters").style.display = "none";
 document.querySelector(".mesProjets").style.margin = "108px 0px 92px 0px";
 
 //On gère la partie logout
-const logButton = document.querySelector("#login");
-logButton.innerHTML = `<li>logout<li>`;
+const logButton = document.querySelector("#login a");
+logButton.innerText = `logout`;
+//logButton.classList.add("logout");
+logButton.addEventListener("click", (e)=> {
+  e.preventDefault()
+  sessionStorage.clear();
+  document.location.href = "index.html";
+});
 
-//On ouvre le modale
+//On ouvre le modal
 modalOpening = document.querySelector("#modal_opener")
-modalOpening.addEventListener("click", ( )=> {
+modalOpening.addEventListener("click", ()=> {
     document.querySelector(".modale_section").style.display = 'block';
+    //On fait en sorte d'afficher le modale1 et non le modale2
+    document.querySelector(".modale1").style.display = 'block';
+    document.querySelector(".modale2").style.display = 'none';
   }
 );
+
+//Fonction pour supprimer un work
+const deleteWork = (workID) => {
+  fetch("http://localhost:5678/api/works" + workID, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  }).catch((error) => {
+    console.log(error);
+  });
+};
+
+//On ferme le modal
+modalClosing = document.querySelector(".closeModale")
+modalClosing.addEventListener("click", (e)=> {
+  e.preventDefault()
+  document.querySelector(".modale_section").style.display = 'none';
+});
+
+//On gère le changement de modal
+const modalSwipe = document.querySelector("#addButton")
+modalSwipe.addEventListener("click", ()=> {
+  document.querySelector(".modale1").style.display = 'none';
+  document.querySelector(".modale2").style.display = 'block';
+});
+
+//Le retour du modale2 au modale1
+const modalBack = document.querySelector(".arrow")
+modalBack.addEventListener("click", (e)=> {
+  e.preventDefault()
+  document.querySelector(".modale2").style.display = 'none';
+  document.querySelector(".modale1").style.display = 'block';
+});
 
 };
 
 //Afficher les éléments adminPage si le token est stocké
-if ("token" !== null) {
+if (sessionStorage.getItem("token") !== null) {
   adminPage();
 }
-
-
-
-
-
-
-  

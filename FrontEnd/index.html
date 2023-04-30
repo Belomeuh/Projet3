@@ -17,9 +17,9 @@
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li id="login">login</li>
+			<li><a href="#portfolio">projets</a></li>
+			<li><a href="#contact">contact</a></li>
+			<li id="login"><a href="./login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -41,7 +41,7 @@
 		<div class="filters">
 			<button class="is-active" data-tag="Tous">Tous</button>
 		</div>
-		<div class="gallery">
+		<div  class="gallery">
 		</div>
 	</section>
 	<section id="contact">
@@ -64,14 +64,51 @@
 					<i class="fa-solid fa-x"></i>
 				</a>
 				<div class="modale1">
-					<h3 class="modale_title" id="modaleTitle"> Galerie Photo </h3>
-					<div class="modale_conteneur" id="modaleConteneur"></div>
+					<h3 class="modale_title" id="modaleTitle"> Galerie photo </h3>
+					<div class="modale_conteneur" id="modaleConteneur">
+					</div>
 					<div class="modale_conteneurAdd" id="modaleConteneurAdd">
 						<button type="submit"  id="addButton">Ajouter une photo</button>
 						<a href="#" id="deleteAll">Supprimer la galerie</a>
 					</div>
 				</div>
+				<div class="modale2">
+					<a href="#" class="arrow">
+						<i class="fa-solid fa-arrow-left"></i>
+					</a>
+					<h3 class="modale_title">Ajout photo</h3>
+					<div class="ajout_photo">
+						<div class="add_work">
+							<form class="add_work_form">
+								<div class="dropzone">
+									<i class="fa-regular fa-image"></i>
+									<label class="add_img">
+										<p>+ Ajouter photo</p>
+										<input type="file" accept="image/png, image/jpeg" name="image" id="image_input" required>
+									</label>
+									<p>jpg, png : 4mo max</p>
+								</div>
+								<label class="add_work_title">
+									<p>Titre</p>
+									<input class="title_input" name="title" required>
+								</label>
+								<label class="add_work_categorie">
+									<p>Catégorie</p>
+									<select type="select" class="select_categorie" name="category" required>
+										<option value></option>
+										<option class="select_categorie_element" id="Objets" value="1">Objets</option>
+										<option class="select_categorie_element" id="Appartements" value="2">Appartements</option>
+										<option class="select_categorie_element" id="Hotels_restaurants" value="3">Hôtels et restaurants</option>
+									</select>
+								</label>	
+								<hr class="hr_line">
+								<input type="submit" value="Valider" id="confirm_add">
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
+		</aside>
 	</section>
 </main>
 

@@ -3,7 +3,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 
 //Error
-const error = document.querySelector("error-message");
+const error = document.querySelector(".error-message");
 
 
 function home() {
@@ -49,5 +49,6 @@ fetch("http://localhost:5678/api/users/login", {
 })
 .catch((error) => {
     console.log(error);
+    error.innerText = "Erreur dans les informations de connexion";
 });
 })

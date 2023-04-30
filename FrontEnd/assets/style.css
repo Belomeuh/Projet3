@@ -198,7 +198,7 @@ button {
 	padding: 0px 10px;
 }
 
-body button:hover {
+body button:focus {
 	background: #1D6154;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
@@ -326,16 +326,16 @@ figure {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.3);
     animation: fadeIn 0.3s both;
 }
 
 .modale_body {
 	border-radius: 10px;
 	background-color: white;
-    width: 50%;
-    height: 50%;
-    padding: 20px;
+    width: 630px;
+    height: 731px;
+    padding-top: 32px;
     overflow: auto;
     animation: slideFromTop 0.3s both;
 }
@@ -344,8 +344,11 @@ figure {
 	float: right;
 	text-decoration: inherit;
     color: inherit;
+	position: absolute;
+	right: 452px;
 }
 
+/*Modal1*/
 .modale_title{
 	font-family: 'Work Sans';
     font-style: normal;
@@ -353,8 +356,8 @@ figure {
     font-size: 26px;
     line-height: 30px;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 46px;
 }
 
 .modale_conteneurAdd {
@@ -362,7 +365,7 @@ figure {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 420px;
     border-top: 1px solid #B3B3B3;
     margin: auto;
 }
@@ -386,3 +389,54 @@ figure {
 	font-family: "Work Sans";
 }
 
+a {
+	text-decoration: none;
+}
+
+header a {
+	color: black;
+}
+
+.modale_conteneur img {
+	width: 78px;
+	height: 105px;
+}
+
+.modale_conteneur figure {
+	width: 78px;
+	position: relative;
+}
+
+.modale_conteneur {
+    display: grid;
+    justify-content: center;
+    margin: 0px 70px;
+    grid-template-columns: 0fr 0fr 0fr 0fr 0fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 13px;
+	padding-bottom: 48px;
+}
+
+.modale_conteneur figcaption {
+	padding-top: 5px;
+}
+
+#trash_can {
+	position: absolute;
+	color: white;
+	background-color: black;
+	height: 17px;
+	width: 17px;
+	border-radius: 2px;
+	font-size: 9px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	right: 5px;
+	top: 5px;
+}
+
+/*Modal2*/
+.modale2 {
+	display: none;
+}
