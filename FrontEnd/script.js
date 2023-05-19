@@ -30,24 +30,19 @@ const createProject = (project) => {
 const createModalProject = (project) => {
   const figureModalProject = document.createElement("figure");
   figureModalProject.setAttribute("data-id", project.id);
-  figureModalProject.innerHTML = `<a href="#" id="trash_can"><i class="fa-solid fa-trash-can"></i></a>`;
-
- // const trashIcon = document.querySelector("#trash_can");
- // trashIcon.addEventListener('click', (e)=> {
-   // e.preventDefault();
-    //deleteWork();
-  //});
+  figureModalProject.innerHTML = `<a href="#" data-id=${project.id} class="trash_can"><img src="./assets/icons/trash-icon.png"></img></a>`;
 
   const imageModalProject = document.createElement("img");
   imageModalProject.src = project.imageUrl;
   imageModalProject.alt = project.title;
- 
-   const figcaptionModalProject = document.createElement("figcaption");
+  imageModalProject.classList.add("modal-project-img")
+
+  const figcaptionModalProject = document.createElement("figcaption");
   figcaptionModalProject.innerText = ("éditer");
 
   figureModalProject.appendChild(imageModalProject);
   figureModalProject.appendChild(figcaptionModalProject);
-  modalGallery.appendChild(figureModalProject); 
+  modalGallery.appendChild(figureModalProject);
 };
 
 
@@ -57,7 +52,7 @@ const createButton = (category) => {
   buttonFilters.setAttribute("data-tag", category.name);
   buttonFilters.setAttribute("data-id", category.id);
   buttonFilters.innerText = category.name;
-  navFilters.appendChild(buttonFilters); 
+  navFilters.appendChild(buttonFilters);
 };
 
 
@@ -102,9 +97,45 @@ const getWorks = async (categoryId) => {
         }
       });
     })
+    .then((filtre) => {
+      //on récupère les boutons
+      const trashIcons = document.querySelectorAll(".trash_can");
+
+
+      trashIcons.forEach((trashIcon) => {
+        //Pour chaque bouton, au clic
+        trashIcon.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          //Get catégorie id
+          let trashIconId = trashIcon.getAttribute("data-id");
+
+          if (confirm("Êtes-vous sûr de vouloir supprimer ce projet ?") == true) {
+            deleteWork(trashIconId);
+          }
+        });
+      });
+    })
     .catch((error) => {
       console.log(error);
     });
+};
+
+
+// Fonction pour supprimer un projet de la modale
+function deleteWork(workID) {
+  fetch("http://localhost:5678/api/works/" + workID, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  }).catch((error) => {
+    console.log(error);
+  });
+
+  //maj affichage des projets : getWorks();
+  getWorks();
 };
 
 // Fonction qui récupère les categories de filtres de l'API
@@ -122,15 +153,15 @@ const getCategories = async () => {
     .then((categories) => {
       //Auxquelles on applique la fonction createButton
       categories.forEach((category) => {
-        createButton(category);        
+        createButton(category);
       });
     })
 
     .then((filtre) => {
       //on récupère les boutons
       const buttons = document.querySelectorAll(".filters button");
-      
-      
+
+
       buttons.forEach((button) => {
         //Pour chaque bouton, au clic
         button.addEventListener("click", function () {
@@ -167,12 +198,12 @@ main();
 
 //Mode admin
 const adminPage = () => {
-//On récupère les éléments
-body = document.querySelector("body")
-photoSophie = document.querySelector(".photoSophie")
-mesProjets = document.querySelector(".mesProjets")
-//
- body.insertAdjacentHTML(
+  //On récupère les éléments
+  body = document.querySelector("body")
+  photoSophie = document.querySelector(".photoSophie")
+  mesProjets = document.querySelector(".mesProjets")
+  //
+  body.insertAdjacentHTML(
     "beforeBegin",
     `<div class="edit_bar">
       <span class="edit"><i class="fa-regular fa-pen-to-square"></i> Mode édition</span>
@@ -180,77 +211,77 @@ mesProjets = document.querySelector(".mesProjets")
       </div>`
   );
 
-photoSophie.insertAdjacentHTML(
-  "afterend",
-  `<a id="photoModif" href= "#" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
+  photoSophie.insertAdjacentHTML(
+    "afterend",
+    `<a id="photoModif" href= "#" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
   );
-mesProjets.insertAdjacentHTML(
-  "BeforeEnd", 
-  `<a id="modal_opener" href="#modale" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
+  mesProjets.insertAdjacentHTML(
+    "BeforeEnd",
+    `<a id="modal_opener" href="#modale" class="edit_link"><i class="fa-regular fa-pen-to-square"></i> modifier</a>`
   );
 
-//On cache les filtres comme sur la maquette
-document.querySelector(".filters").style.display = "none";  
-document.querySelector(".mesProjets").style.margin = "108px 0px 92px 0px";
+  //On cache les filtres comme sur la maquette
+  document.querySelector(".filters").style.display = "none";
+  document.querySelector(".mesProjets").style.margin = "108px 0px 92px 0px";
 
-//On gère la partie logout
-const logButton = document.querySelector("#login a");
-logButton.innerText = `logout`;
-//logButton.classList.add("logout");
-logButton.addEventListener("click", (e)=> {
-  e.preventDefault()
-  sessionStorage.clear();
-  document.location.href = "index.html";
-});
+  //On gère la partie logout
+  const logButton = document.querySelector("#login a");
+  logButton.innerText = `logout`;
+  //logButton.classList.add("logout");
+  logButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    sessionStorage.clear();
+    document.location.href = "index.html";
+  });
 
-//On ouvre le modal
-modalOpening = document.querySelector("#modal_opener")
-modalOpening.addEventListener("click", ()=> {
+  //On ouvre le modal
+  modalOpening = document.querySelector("#modal_opener")
+  modalOpening.addEventListener("click", () => {
     document.querySelector(".modale_section").style.display = 'block';
     //On fait en sorte d'afficher le modale1 et non le modale2
     document.querySelector(".modale1").style.display = 'block';
     document.querySelector(".modale2").style.display = 'none';
   }
-);
+  );
 
-//Fonction pour supprimer un work
-const deleteWork = (workID) => {
-  fetch("http://localhost:5678/api/works" + workID, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-  }).catch((error) => {
-    console.log(error);
+  //On ferme le modal
+  modalClosing = document.querySelector(".closeModale")
+  modalClosing.addEventListener("click", (e) => {
+    e.preventDefault()
+    document.querySelector(".modale_section").style.display = 'none';
   });
-};
 
-//On ferme le modal
-modalClosing = document.querySelector(".closeModale")
-modalClosing.addEventListener("click", (e)=> {
-  e.preventDefault()
-  document.querySelector(".modale_section").style.display = 'none';
-});
+  const deleteGalery = document.querySelector("#deleteAll")
+  deleteGalery.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (confirm("Êtes-vous sûr de vouloir supprimer la galerie?") == true) {
+      const figures = modalGallery.querySelectorAll("figure");
+      for (let i = 0; i < figures.length; i++) {
+        const figureID = figures[i].getAttribute("data-id");
 
-//On gère le changement de modal
-const modalSwipe = document.querySelector("#addButton")
-modalSwipe.addEventListener("click", ()=> {
-  document.querySelector(".modale1").style.display = 'none';
-  document.querySelector(".modale2").style.display = 'block';
-});
+        deleteWork(figureID);
+      }
+    }
+  })
 
-//Le retour du modale2 au modale1
-const modalBack = document.querySelector(".arrow")
-modalBack.addEventListener("click", (e)=> {
-  e.preventDefault()
-  document.querySelector(".modale2").style.display = 'none';
-  document.querySelector(".modale1").style.display = 'block';
-});
+  //On gère le changement de modal
+  const modalSwipe = document.querySelector("#addButton")
+  modalSwipe.addEventListener("click", () => {
+    document.querySelector(".modale1").style.display = 'none';
+    document.querySelector(".modale2").style.display = 'block';
+  });
 
-};
-
-//Afficher les éléments adminPage si le token est stocké
-if (sessionStorage.getItem("token") !== null) {
-  adminPage();
-}
+  //Le retour du modale2 au modale1
+  const modalBack = document.querySelector(".arrow")
+  modalBack.addEventListener("click", (e)=> {
+    e.preventDefault()
+    document.querySelector(".modale2").style.display = 'none';
+    document.querySelector(".modale1").style.display = 'block';
+  });
+  
+  };
+  
+  //Afficher les éléments adminPage si le token est stocké
+  if (sessionStorage.getItem("token") !== null) {
+    adminPage();
+  }
