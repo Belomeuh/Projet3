@@ -324,8 +324,15 @@ const adminPage = () => {
       //Fetch api
       await fetch('http://localhost:5678/api/works/', {
         method: 'POST',
-        headers: {'Authorization': `Bearer ${myToken}`},
-        body: formData
+        headers: {
+        Authorization: "Bearer " + token,
+        body: formData },
+      })
+
+        .then((response) => {
+          if (response.ok) {
+            FormData();
+          }
     });
   
 }};
