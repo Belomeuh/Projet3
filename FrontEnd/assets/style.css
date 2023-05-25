@@ -416,6 +416,10 @@ figure {
 	text-decoration: none;
 }
 
+.error-message {
+	color: red;
+}
+
 /*Modale*/
 .modale_section {
 	display: none;
@@ -560,13 +564,11 @@ header a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	height: 169px;
 	background-color: #E8F1F7;
 }
 
-.dropzone img {
-	padding-top: 26px;
-}
 
 .dropzone p {
 	font-size: 10px;
@@ -630,6 +632,6 @@ header a {
 #confirm_add {
 	width: 237px;
 	height: 36px;
-	background-color: #a7a7a7;
 	border: none;
+	background-color: grey;
 }
