@@ -524,7 +524,7 @@ header a {
 	padding-bottom: 48px;
 }
 
-.modale_conteneur figcaption {
+figcaption {
 	padding-top: 5px;
 }
 
@@ -634,4 +634,10 @@ header a {
 	height: 36px;
 	border: none;
 	background-color: grey;
+}
+
+#preview-image {
+	width: 40%;
+	object-fit: contain;
+	height: 100%;
 }
