@@ -68,7 +68,7 @@
 			<aside id="modale" class="modale" role="dialog" aria-labelledby="modaleTitle" aria-modal="true">
 				<div class="modale_body">
 					<a href="#" class="closeModale">
-						<img src="assets/icons/vector.png">
+						<img src="assets/icons/vector.png" onclick="resetForm()">
 					</a>
 					<div class="modale1">
 						<h3 class="modale_title" id="modaleTitle"> Galerie photo </h3>
@@ -81,18 +81,17 @@
 					</div>
 					<div class="modale2">
 						<a href="#" class="arrow">
-							<img src="assets/icons/Arrow_Back.png">
+							<img src="assets/icons/Arrow_Back.png" onclick="resetForm()">
 						</a>
 						<h3 class="modale_title" id="add_title">Ajout photo</h3>
 						<div class="ajout_photo">
 							<div class="add_work">
-								<form class="add_work_form">
+								<form class="add_work_form" name="formulaire">
 									<div class="dropzone">
 										<img class="photoIcon" src="assets/icons/image.png">
 										<label class="add_img">
 											<p>+ Ajouter photo</p>
-											<input type="file" accept="image/png, image/jpeg" name="image"
-												id="image_input" required>
+											<input type="file" accept="image/png, image/jpeg" name="image" id="image_input" required>
 										</label>
 										<p id="types_files">jpg, png : 4mo max</p>
 									</div>

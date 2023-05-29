@@ -269,7 +269,9 @@ const adminPage = () => {
   //Prévisu image
   const showFile = (e) => {
     e.preventDefault();
-
+    if (previewImg.src != undefined) {
+      console.log('ok')
+    };
     const reader = new FileReader();
 
     reader.readAsDataURL(inputFile.files[0]);
@@ -288,9 +290,10 @@ const adminPage = () => {
     pictureIcon.style.display = "none";
     const typeFiles = document.querySelector('#types_files');
     typeFiles.style.display = 'none';
-
     previewBox.appendChild(previewImg);
   };
+
+
 
   const checkForm = () => {
     if (inputElement.value !== "" && selectElement.value !== "" && fileInputElement.value !== "") {
@@ -312,16 +315,18 @@ const adminPage = () => {
   selectElement.addEventListener('input', checkForm);
   fileInputElement.addEventListener('change', checkForm);
 
+  addWorkForm.addEventListener('submit', async (e) => {
+    
+    e.preventDefault();
 
-  validButton.addEventListener('click', async (e) => {
     if (!fileInputElement.value) {
-      e.preventDefault();
+     
       alert("Veuillez sélectionner un fichier.");
     } else if (!inputElement.value) {
-      e.preventDefault();
+      
       alert("Veuillez entrer un titre pour votre fichier.");
     } else if (selectElement.value < 1) {
-      e.preventDefault();
+      
       alert("Veuillez sélectionner une catégorie pour votre fichier.");
     } else {
       addWork();
@@ -353,6 +358,10 @@ const adminPage = () => {
       if (res.ok) {
 
         console.log('success');
+        getWorks();
+        closeModale();
+
+
       } else {
 
         throw new Error('Error status code: ' + res.status);
@@ -364,17 +373,25 @@ const adminPage = () => {
   }
 };
 
+function resetForm(){
+  document.formulaire.reset();
+}
+
+function closeModale(){
+  document.querySelector(".modale_section").style.display = "none";
+};
 //On ferme le modal
 const modale_section = document.querySelector(".modale_section");
 modalClosing = document.querySelector(".closeModale")
 modalClosing.addEventListener("click", (e) => {
-  e.preventDefault()
-  document.querySelector(".modale_section").style.display = "none";
+  e.preventDefault();
+  closeModale();
 });
 
 window.onclick = function (event) {
   if (event.target == modale) {
-    modale_section.style.display = "none";
+   closeModale();
+  resetForm();
   }
 };
 
